@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ini Page Product</h1>
+    <div id="wrapper-data">
+        <!-- <% for( let i = 0; i < data.length; i++ ) { %>
+            <h4>Product Name : <%= data[i].title %></h4>
+            <small>Price : <%= data[i].price %></small>
+        <% } %> -->
+    </div>
+
+    <script>
+        fetch('/product/api/all')
+            .then(response => { console.log(response); return response.json() })
+            .then(data => {
+                for( let i = 0; i < data.results.length; i++ ) {
+                    document.getElementById("wrapper-data").innerHTML += `
+                        <h4>Product Name : ${ data.results[i].title }</h4>
+                        <small>Price : ${ data.results[i].price }</small>
+                        <img src="${ data.results[i].image }" />
+                    `
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    </script>
+</body>
+</html>

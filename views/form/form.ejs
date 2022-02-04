@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Request</title>
+</head>
+<body>
+    <!-- <form action="/form/post" method="post"> -->
+        <div>
+            <label>Title</label>
+            <input id="title" name="title" />
+        </div>
+        <div>
+            <label>Price</label>
+            <input id="price" name="price" />
+        </div>
+        <button type="button" onclick="submitData()">Submit Data</button>
+    <!-- </form> -->
+    <script>
+        function submitData() {
+            let dataTitle = document.querySelector("#title").value
+            let dataPrice = document.querySelector("#price").value
+
+            let settingPost = {
+                method: 'post',
+                body: JSON.stringify({
+                    title: dataTitle,
+                    price: dataPrice
+                }),
+
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+
+            let dataFinal = await fetch('/form/post', settingPost)
+                .then(response => response.json())
+                .then(result => result ).catch(err => false)
+        }
+
+        let ac = "adalah"
+
+        console.log("saya" + ac + "enricho")
+        console.log(`saya ${ ac } enricho`)
+        "background-image", `url('${ ac }')`
+    </script>
+</body>
+</html>

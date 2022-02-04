@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Tester</h1>
+    <div id="wrapper-data"></div>
+    <script>
+        async function tester() {
+            let data = await fetch('https://hades.tokopedia.com/category/v1/tree/all').then(response => response.json()).catch(err => false)
+            console.log(data)
+            if ( !data ) {
+                console.log('false')
+            } else {
+                let categories = data.data.categories
+                for( let x in categories ) {
+                    if ( categories.child ) {
+                        for( let y in categories.child ) {
+                            console.log(categories.child[y])
+                            document.querySelector("#wrapper-data").innerHTML += `
+                                <div id="${ categories[x].name }">
+                                    <h4>${ categories[x].name }</h4>
+                                </div>
+                            `   
+                        }
+                    }
+                    
+                }
+            }
+        }
+
+        tester()
+    </script>
+</body>
+</html>
+
+<!--
+
+    - Bikin API
+    
+    View * API = DIPISAH
+
+    // Views
+    Routes.get('/product', ProductControllers.ViewProduct)
+
+    // API
+    Routes.get('/product/api/getAll', ProductControllers.GetAll)
+
+    fetch('/product/api/getAll')
+
+-->

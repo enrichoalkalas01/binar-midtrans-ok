@@ -16,23 +16,66 @@ exports.All = (req, res) => {
 }
 
 exports.Create = (req, res) => {
+    // Create / Insert New Schema DB
+    const newProduct = new ProductModel({
+        title: req.body.title,
+        description: req.body.description,
+        price: req.body.price
+    })
 
+    newProduct.save(newProduct).then(response => {
+        res.send({
+            message: `Successfull to create data`,
+            statusCode: 200,
+            results: response
+        })
+    }).catch(err => {
+        res.send({
+            message: `Failed to create data`,
+            statusCode: 500
+        })
+    })
 }
 
 exports.FindOne = (req, res) => {
-
+    ProductModel.findOne({ "_id": req.params.id }).then(response => {
+        res.send({
+            message: `Successfull to create data`,
+            statusCode: 200,
+            results: response
+        })
+    }).catch(err => {
+        res.send({
+            message: `Failed to create data`,
+            statusCode: 500,
+        })
+    })
 }
 
 exports.UpdateOne = (req, res) => {
 
 }
 
-exports.UpdateMany = (req, res) => {
-
-}
-
 exports.Delete = (req, res) => {
-
+    if ( !req.body ) {
+        res.send({
+            message: `Failed to delete data`,
+            statusCode: 400
+        })
+    } else {
+        ProductModel.deleteOne({ "_id": req.body.id }).then(response => {
+            res.send({
+                message: `Successfull to delete data`,
+                statusCode: 200
+            })
+        }).catch(err => {
+            res.send({
+                message: `Failed to delete data`,
+                statusCode: 500
+            })
+        })
+    }
 }
 
 // CRUD = Create, Read, Update, Delete
+// Username, Password, Fullname, Email, Age, Description

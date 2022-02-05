@@ -19,5 +19,8 @@ Routes.post('/form/post', FormControllers.create)
 
 // API Product
 Routes.get('/product/api/all', ProductAPIControllers.All)
+Routes.get('/product/api/findOne/:id', ProductAPIControllers.FindOne)
+Routes.post('/product/api/create', ProductAPIControllers.Create)
+Routes.post('/product/api/delete', ProductAPIControllers.Delete)
 
 module.exports = Routes

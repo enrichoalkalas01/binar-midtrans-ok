@@ -1,55 +1,75 @@
 const ProductModel = require('../../models/mongodb/products/product')
+const JWT = require('jsonwebtoken')
+const JWTModule = require('../../module/JWTCheck')
 
-exports.All = (req, res) => {
-    ProductModel.find().then(response => {
-        res.send({
-            message: `Successfull to get data`,
-            statusCode: 200,
-            results: response
+exports.All = async (req, res) => {
+    let Token = await JWTModule.JWTVerify(req.headers)
+    if ( !Token ) {
+        res.send(403)
+    } else {
+        await ProductModel.find().then( response => {
+            res.send({
+                message: `Successfull to get data`,
+                statusCode: 200,
+                results: response
+            })
+        }).catch(err => {
+            res.send({
+                message: `Failed to get data`,
+                statusCode: 500,
+            })
         })
-    }).catch(err => {
-        res.send({
-            message: `Failed to get data`,
-            statusCode: 500,
-        })
-    })
+    }
 }
 
-exports.Create = (req, res) => {
-    // Create / Insert New Schema DB
-    const newProduct = new ProductModel({
-        title: req.body.title,
-        description: req.body.description,
-        price: req.body.price
-    })
+exports.Create = async (req, res) => {
+    let Token = await JWTModule.JWTVerify(req.headers)
+    if ( !Token ) {
+        res.send(403)
+    } else {
+        // Create / Insert New Schema DB
+        const newProduct = new ProductModel({
+            UID: ResultToken.UID,
+            UserOwner: ResultToken.Username,
+            title: req.body.title,
+            description: req.body.description,
+            price: req.body.price,
+        })
 
-    newProduct.save(newProduct).then(response => {
-        res.send({
-            message: `Successfull to create data`,
-            statusCode: 200,
-            results: response
+        newProduct.save(newProduct).then(response => {
+            res.send({
+                message: `Successfull to create data`,
+                statusCode: 200,
+                results: response
+            })
+        }).catch(err => {
+            res.send({
+                message: `Failed to create data`,
+                statusCode: 500
+            })
         })
-    }).catch(err => {
-        res.send({
-            message: `Failed to create data`,
-            statusCode: 500
-        })
-    })
+    }
 }
 
-exports.FindOne = (req, res) => {
-    ProductModel.findOne({ "_id": req.params.id }).then(response => {
-        res.send({
-            message: `Successfull to create data`,
-            statusCode: 200,
-            results: response
+exports.FindOne = async (req, res) => {
+    let Token = await JWTModule.JWTVerify(req.headers)
+    if ( !Token ) {
+        res.send(403)
+    } else {
+        ProductModel.findOne({ "_id": req.params.id, "UserOwner": ResultToken.Username }).then(response => {
+            res.send({
+                message: `Successfull to create data`,
+                statusCode: 200,
+                results: response
+            })
+        }).catch(err => {
+            res.send({
+                message: `Failed to create data`,
+                statusCode: 500,
+            })
         })
-    }).catch(err => {
-        res.send({
-            message: `Failed to create data`,
-            statusCode: 500,
-        })
-    })
+    }
+    
 }
 
 exports.UpdateOne = (req, res) => {

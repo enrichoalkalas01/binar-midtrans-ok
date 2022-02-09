@@ -4,6 +4,8 @@ const Path = require('path')
 exports.ImagesCreate = (req, res) => {
     let Data = req.files.imagesData
     console.log(Data)
+
+    // Get Domain = req.get('host')
     
     // if ( !Data.mimetype.includes('image') ) {
     //     res.sendStatus(400)

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | APPS KITA</title>
+</head>
+<body>
+    <div>
+        <div>
+            <label>Username</label>
+            <input type="text" id="username" name="username" placeholder="input username here..." />
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" id="password" name="password" placeholder="input password here..." />
+        </div>
+        <button type="button" onclick="loginButton()">Login</button>
+    </div>
+    <script>
+        function setCookie(name,value,days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days*24*60*60*1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+        }
+
+        async function loginButton() {
+            let dataPassing = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: document.querySelector("#username").value,
+                    password: document.querySelector("#password").value
+                })
+            }
+
+            let DataLogin = await fetch('/api/login', dataPassing).then(response => response.json()).catch(err => false)
+            document.cookie = "asdas=ini isi; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            console.log(DataLogin)
+            
+            // setCookie("login-data-user", JSON.stringify(DataLogin.results), 1)
+            // if ( !DataLogin ) {
+            //     alert('failed to login')
+            // } else {
+                
+            // }
+        }
+    </script>
+</body>
+</html>

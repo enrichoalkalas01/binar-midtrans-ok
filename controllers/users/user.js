@@ -39,6 +39,7 @@ exports.Create = async (req, res) => {
 }
 
 exports.Login = async (req, res) => {
+    console.log(req.body)
     let DataUser = await UserModel.findOne({ 'username': req.body.username }).then(response => response).catch(err => false)
     if ( !DataUser ) {
         res.send({
@@ -68,10 +69,44 @@ exports.Login = async (req, res) => {
             }
 
             res.send({
-                message: `Wrong username or password`,
+                message: `Successfull to login`,
                 statusCode: 200,
                 results: DataPassing
             })
+        }
+    }
+}
+
+exports.LoginPost = async (req, res) => {
+    let DataUser = await UserModel.findOne({ 'username': req.body.username }).then(response => response).catch(err => false)
+    if ( !DataUser ) {
+        res.send({
+            message: `Data not found`,
+            statusCode: 400
+        })
+    } else {
+        let Password = cryptr.decrypt(DataUser.password)
+        if ( Password != req.body.password ) {
+            res.send({
+                message: `Wrong username or password`,
+                statusCode: 400
+            })
+        } else {
+            let CreateToken = JWT.sign(
+                { UID: DataUser._id, Username: DataUser.username, Email: DataUser.email },
+                process.env.SecretKey,
+                { expiresIn: '1h' }
+            )
+
+            let DataPassing = {
+                Username: DataUser.username,
+                Fullname: DataUser.fullname,
+                Email: DataUser.email,
+                TokenType: 'Bearer',
+                Token: CreateToken
+            }
+
+            res.render('login', { LoginData: JSON.stringify(DataPassing) })
         }
     }
 }

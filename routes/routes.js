@@ -12,6 +12,7 @@ const ImagesControllers = require('../controllers/images/images')
 Routes.get('/login', (req, res) => {
     res.render('login')
 })
+Routes.get('/api/login', UserControllers.Login)
 Routes.post('/login-post', UserControllers.LoginPost)
 
 // Homepages
@@ -30,6 +31,7 @@ Routes.get('/product/api/all', ProductAPIControllers.All)
 Routes.get('/product/api/findOne/:id', ProductAPIControllers.FindOne)
 Routes.post('/product/api/create', ProductAPIControllers.Create)
 Routes.post('/product/api/delete', ProductAPIControllers.Delete)
+Routes.get('/product/api/getByUserData', ProductAPIControllers.findByUserData)
 
 Routes.post('/user/api/create', UserControllers.Create)
 Routes.post('/api/login', UserControllers.Login)
@@ -41,5 +43,8 @@ Routes.get('/images', (req, res) => {
 
 Routes.post('/api/images', ImagesControllers.ImagesCreate)
 Routes.get('/get/images', ImagesControllers.getImages)
+
+// Search Engine
+Routes.get('/api/product/search', ProductAPIControllers.Search)
 
 module.exports = Routes

@@ -5,7 +5,7 @@ exports.ImagesCreate = (req, res) => {
     let Data = req.files.imagesData
     console.log(Data)
 
-    // Get Domain = req.get('host')
+    // Get Domain = req.get('host') + '/images/' + namaFile
     
     // if ( !Data.mimetype.includes('image') ) {
     //     res.sendStatus(400)

@@ -1,0 +1,24 @@
+// const base = require('../controllers/products/productView')
+// const mockRequest = (body = {}) => ({ body })
+// const mockResponse = () => {
+//     const res = {}
+//     res.send = jest.fn().mockReturnValue(res)
+//     res.statusCode = jest.fn().mockReturnValue(res)
+//     return res
+// }
+
+// describe('product  test oapin function', () => {
+//     test('res.json called with { status: true, message: "ok" }', done => {
+//         const req = mockRequest()
+//         const res = mockResponse()
+//         base.findAll(req, res)
+//         expect(res.statusCode).toBeCalledWith(200)
+//         expect(res.send).toBeCalledWith({
+//             status: true,
+//             message: "successfull to get data"
+//         })
+//         done()
+//     })
+// })
+
+// baseControllers.spec.js

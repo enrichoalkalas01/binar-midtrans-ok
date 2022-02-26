@@ -25,3 +25,26 @@ exports.getImages = (req, res) => {
         images: '/images/' + 'qFr5u8W0G00lPc70nFHq186T9.jpeg'
     })
 }
+
+
+
+/*
+
+1. HTTP Protocol Server & CLient
+    - Apache / Nginx
+    - Nodejs 
+    - Python3 ( Chocolatey )
+    - Mysql / Postgresql
+2. PM2 JS -G
+
+PATH = /var/www/website/Learning/binar-deploy-tester-1
+DOMAIN = prototype.enrichoalkalas.my.id
+
+server {
+    listen 80;
+    root /var/www/website/Wedding/wedding-template-one;
+    index index.html;
+    server_name enrichoalkalas.my.id;
+}
+
+*/

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    <style>
+        section, .wrapper, .component1 {
+            position: relative;
+        }
+
+        .wrapper {
+            padding-left: 10%;
+            padding-top: 10%;
+        }
+
+        .box.component {
+            width: 300px;
+            height: 300px;
+            background-color: aquamarine;
+            position: relative;
+        }
+
+        .box.component1 {
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .box.component2 {
+            width: 100px;
+            height: 100px;
+            background-color: brown;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+
+        .box.component3 {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+    </style>
+
+
+    <section>
+        <div class="wrapper">
+            <div class="box component">
+                <div class="box component1"></div>
+                <div class="box component2"></div>
+                <div class="box component3"></div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

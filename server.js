@@ -40,4 +40,7 @@ Includes :
 5. Create a database who have an owner ( relation owner )
 6. Must have 3 user data
 
+Harga = 12.000 + Harga Transfer ( 6.500 )
+Total = 18.500
+
 */

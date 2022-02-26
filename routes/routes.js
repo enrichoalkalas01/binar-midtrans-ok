@@ -7,6 +7,9 @@ const ProductAPIControllers = require('../controllers/products/product')
 const FormControllers = require('../controllers/form/form')
 const UserControllers = require('../controllers/users/user')
 const ImagesControllers = require('../controllers/images/images')
+const ProductSequelize = require('../controllers/products/Sequelize')
+// const MidtransControllers = require('../controllers/tester/Midtrans')
+const MidtransControllers = require('../controllers/midtrans/Midtrans')
 
 // Login
 Routes.get('/login', (req, res) => {
@@ -46,5 +49,18 @@ Routes.get('/get/images', ImagesControllers.getImages)
 
 // Search Engine
 Routes.get('/api/product/search', ProductAPIControllers.Search)
+
+// Sequelize
+Routes.post('/api/sequelize', ProductSequelize.Create)
+Routes.get('/api/sequelize', ProductSequelize.Find)
+Routes.put('/api/sequelize', ProductSequelize.Update)
+Routes.delete('/api/sequelize', ProductSequelize.Delete)
+
+// Midtrans
+Routes.post('/api/midtrans', MidtransControllers.CreateTransaction)
+Routes.post('/api/midtrans/pay', MidtransControllers.Payment)
+Routes.get('/api/midtrans/iris', MidtransControllers.IrisFunction)
+Routes.post('/api/midtrans/snap', MidtransControllers.SnapFunction)
+Routes.post('/api/midtrans/snap/redirect', MidtransControllers.RedirectSnap)
 
 module.exports = Routes

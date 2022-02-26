@@ -29,10 +29,11 @@ const detailProduct = (req, res) => {
 }
 
 exports.findAll = (req, res) => {
-    res.send({
+    res.statusCode(200).send({
         message: 'successfull to get data',
-        statusCode: 200,
-        results : dataProduct
+        status: true,
+        // statusCode: 200,
+        // results : dataProduct
     })
 }
 
